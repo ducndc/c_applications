@@ -12,6 +12,7 @@
 #include <stddef.h>
 
 #include "app_ctrl.h"
+#include "utils.h"
 
 int 
 make_addr(
@@ -54,6 +55,7 @@ app_ctrl_t
 
     if (ctrl->s < 0)
     {
+        APP_LOG("socket");
         goto error;
     }
 
@@ -61,6 +63,7 @@ app_ctrl_t
 
     if (bind(ctrl->s, (struct sockaddr *)&ctrl->local, socklen) < 0)
     {
+        APP_LOG("bind");
         close(ctrl->s);
         goto error;
     }
@@ -70,6 +73,7 @@ app_ctrl_t
 
     if (status < 0)
     {
+        APP_LOG("connect");
         close(ctrl->s);
         goto error;
     }

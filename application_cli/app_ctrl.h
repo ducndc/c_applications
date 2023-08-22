@@ -5,8 +5,8 @@
  *
  */
 
- #ifndef __APP_CTRL_H__
- #define __APP_CTRL_H__
+#ifndef __APP_CTRL_H__
+#define __APP_CTRL_H__
 
 #include <sys/un.h>
 #include <sys/socket.h>
@@ -27,4 +27,4 @@ void app_ctrl_close(app_ctrl_t *ctrl);
 
 int app_cli_command(app_ctrl_t *ctrl, const char *cmd, size_t cmd_len);
 
- #endif /* END __APP_CTRL_H__ */
+#endif /* END __APP_CTRL_H__ */
