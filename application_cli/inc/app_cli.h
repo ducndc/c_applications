@@ -20,5 +20,6 @@ struct app_cli_cmd {
 
 static int app_cli_cmd_help(app_ctrl_t *ctrl, int argc, char *argv[]);
 static int app_cli_send_raw_data(app_ctrl_t *ctrl, int argc, char *argv[]);
+static int app_cli_send_temination(app_ctrl_t *ctrl, int argc, char *argv[]);
 
 #endif /* END __APP_CLI_H__ */

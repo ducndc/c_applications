@@ -65,16 +65,21 @@ main(
     for (;;) {
         if (FD_ISSET(ctrl_sock, &rset)) 
         {
-            app_ctrl_interface_recv_and_parse(ctrl_sock);
+            if (-1 == app_ctrl_interface_recv_and_parse(ctrl_sock))
+            {
+                break;
+            }
         }
     }
     
+    close(ctrl_sock);
+
     APP_LOG("application terminate");
 
     return 0;
 }
 
-void 
+int 
 app_ctrl_interface_recv_and_parse(
     int ctrl_sock
 )
@@ -93,11 +98,13 @@ app_ctrl_interface_recv_and_parse(
     if (recv_fd < 0)
     {
         close(recv_fd);
-        return;
+        return -1;
     }
 
     len = recv(recv_fd, buf, len, 0);
     buf[len] = '\0';
+
+    APP_LOG(buf);
 
     if (0 == strncmp(buf, "dev_send_app", strlen("dev_send_app")))
     {
@@ -105,7 +112,12 @@ app_ctrl_interface_recv_and_parse(
         APP_LOG("Running command, which recived from app_ctrl");
         /* send_app_raw_data */
     } 
-    else 
+    else if (0 == strncmp(buf, "termination", strlen("termination")))
+    {
+        close(recv_fd);
+        return -1;
+    } 
+    else
     {
         APP_LOG("no such command");
     }

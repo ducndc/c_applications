@@ -16,11 +16,14 @@ main(
     char *argv[]
 )
 {
+#ifdef UPTIME_FUNCTION
     long uptime = 0;
 
     uptime = get_uptime();
+    printf("Uptime of system is %ld seconds\n", uptime);
     printf("Uptime of system is %ld hours\n", SECOND_2_HOURS(uptime));
     printf("Uptime of system is %ld day\n", SECOND_2_DAY(uptime));
+#endif
 
     return 0;
 }

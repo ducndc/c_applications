@@ -13,7 +13,9 @@
 #include "utils.h"
 
 long
-get_uptime()
+get_uptime(
+    void
+)
 {
     FILE *fp = NULL;
     char buf[64] = {0};

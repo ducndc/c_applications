@@ -10,6 +10,6 @@
 
 #define PROC_LINUX_UP_TIME  "/proc/uptime"
 
-long get_uptime();
+long get_uptime(void);
 
 #endif /* END __TIME_FUNCTIONS_H__ */

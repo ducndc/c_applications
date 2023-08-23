@@ -1,8 +1,18 @@
+# Author: 	Chung Duc Nguyen Dang
+# Email:	nguyendangchungduc1999@gmail.com
+
 CURRPATH = $(shell pwd)
 
-CFLAGS = -I$(CURRPATH)
+include $(CURRPATH)/utils_functions.config
 
-OBJS = test_functions.o time_functions.o
+ifneq ($(strip $(UPTIME_FUNCTION)),)
+CFLAGS = -DUPTIME_FUNCTION
+endif
+
+CFLAGS += -I$(CURRPATH)/inc
+
+OBJS = ./src/test_functions.o 
+OBJS += ./src/time_functions.o
 
 APPLICATION = test_functions 
 
@@ -14,6 +24,7 @@ $(APPLICATION):$(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 clean:
-	rm -rf *.o 
+	rm -rf *.o \
+	rm $(TARGET)
 
 .PHONY: all clean

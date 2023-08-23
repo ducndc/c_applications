@@ -19,7 +19,8 @@ static app_ctrl_t *ctrl_conn;
 
 static app_cli_cmd_t cli_cmds[] = {
     {"help", app_cli_cmd_help, "command usage"},
-    {"dev_send_app", app_cli_send_raw_data, "send raw data to app"}
+    {"dev_send_app", app_cli_send_raw_data, "send raw data to app"},
+    {"termination", app_cli_send_temination, "terminate application"}
 };
 
  static int 
@@ -69,6 +70,26 @@ app_cli_cmd_help(
 
 static int 
 app_cli_send_raw_data(
+    app_ctrl_t *ctrl,
+    int argc,
+    char *argv[]
+)
+{
+    char cmd[256];
+    int i = 0;
+    int ret = 0;
+
+    sprintf(&cmd[i], "%s ", argv[0]);
+    i += strlen(argv[0]) + 1;
+    sprintf(&cmd[i], "%s ", argv[1]);
+
+    ret = app_cli_command(ctrl, cmd, strlen(cmd));
+
+    return ret;
+}
+
+static int 
+app_cli_send_temination(
     app_ctrl_t *ctrl,
     int argc,
     char *argv[]
