@@ -13,6 +13,7 @@ CFLAGS += -I$(CURRPATH)/inc
 
 OBJS = ./src/test_functions.o 
 OBJS += ./src/time_functions.o
+OBJS += ./src/memory.o
 
 APPLICATION = test_functions 
 
